@@ -13,7 +13,13 @@ Todo.remove({}).then((result) => {
 //Todo.findOneAndRemove
 //Todo.findByIdAndRemove
 
+/*
 Todo.findByIdAndRemove('58f473db09e150c22bbac113')
 .then((todo) => {
   console.log(todo);
 });
+*/
+
+Todo.findOneAndRemove({
+  _id: 
+})
