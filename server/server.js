@@ -1,6 +1,7 @@
 //Library imports
 var express = require('express');
 var bodyParser = require('body-parser');
+const {ObjectID} = require('mongodb');
 
 //Local imports
 var {mongoose} = require('./db/mongoose');
@@ -39,6 +40,40 @@ app.get('/todos', (req, res) => {
   );
 });
 
+
+//Get /todos/123456
+app.get('/todos/:id', (req, res) => {
+  var id = req.params.id;
+
+  //Validate id using isValid
+    //If not valid: 404 - send back empty send
+  if(!ObjectID.isValid(id)){
+    console.log('ID is not in valid format');
+    return res.status(404).send();
+  }  
+  
+  //findById
+    //success
+  Todo.findById(id)
+  .then((todo) => {
+    //if no todo - send back 404 with empty body
+    if(!todo) return res.status(404).send();
+    //if todo - send it back
+    return res.status(200).send({todo});
+  })
+  .catch((e) => {
+    return res.status(400).send()
+  })
+  
+  
+    
+      
+      
+    //error
+      //400 - send back empty body back
+  
+  
+})
 
 
 app.listen(3000, () => {
