@@ -62,18 +62,18 @@ app.get('/todos/:id', (req, res) => {
     return res.status(200).send({todo});
   })
   .catch((e) => {
+    //error
+    //400 - send back empty body back
     return res.status(400).send()
   })
-  
-  
-    
-      
-      
-    //error
-      //400 - send back empty body back
-  
-  
 })
+
+
+
+
+
+
+
 
 
 app.listen(3000, () => {
