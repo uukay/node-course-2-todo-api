@@ -15,6 +15,7 @@ const port = process.env.PORT || 3000;
 //Middleware
 app.use(bodyParser.json());
 
+//Post
 app.post('/todos', (req, res) => {
   var todo = new Todo({
     text: req.body.text
@@ -71,7 +72,30 @@ app.get('/todos/:id', (req, res) => {
   })
 })
 
+app.delete('/todos/:id', (req, res) => {
+  // Get the id
+  var id = req.params.id;
+  //Validate the id -> not valid return 404
+  if(!ObjectID.isValid(id)){
+    console.log('ID is not in valid format');
+    return res.status(404).send();
+  }    
 
+  //Remove todo by id
+  Todo.findByIdAndRemove(id)
+  .then((todo) => {
+    //Success
+    //if no doc, send 404
+    if(!todo) return res.status(404).send();
+    //if doc, send back doc with 200
+    return res.status(200).send({todo});
+  })
+  .catch((e) => {
+    //Error
+      //400 with empty body
+    return res.status(400).send()
+  })  
+});
 
 
 
