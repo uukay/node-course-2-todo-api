@@ -1,3 +1,5 @@
+require('./config/config.js');
+
 //Library imports
 const _ = require('lodash');
 const express = require('express');
@@ -11,7 +13,6 @@ var {User} = require('./models/user');
 
 var app = express();
 const port = process.env.PORT || 3000;
-
 
 //Middleware
 app.use(bodyParser.json());
